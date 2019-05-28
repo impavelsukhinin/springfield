@@ -1,0 +1,45 @@
+{
+  "name": "base",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "git@github.com:impavelsukhinin/base.git",
+  "author": "impavelsukhinin <p.sukhinin@rocketguys.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon",
+    "prettier": "prettier --write \"{src/**/*.{ts,tsx},*.{json,js}}\""
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "always"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts",
+    "ignore": [
+      "src/**/*.spec.ts"
+    ],
+    "exec": "TS_NODE_FILES=true node --inspect=9292 --require ts-node/register --require tsconfig-paths/register src/index.ts"
+  },
+  "dependencies": {
+    "@types/node": "^12.0.2",
+    "koa": "^2.7.0",
+    "ts-node": "^8.2.0",
+    "tsconfig-paths": "^3.8.0",
+    "typeorm": "^0.2.17"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.48",
+    "nodemon": "^1.19.1",
+    "prettier": "^1.17.1",
+    "typescript": "^3.4.5"
+  },
+  "engines": {
+    "node": ">=7.6.0"
+  },
+  "engineStrict": true
+}

@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "outDir": "build",
+    "baseUrl": "src"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", ".vscode"]
+}
