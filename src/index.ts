@@ -1,12 +1,27 @@
+import 'env'
+import 'reflect-metadata'
+import connection from 'db'
 import * as Koa from 'koa'
 import { Context } from 'koa'
 
-const app = new Koa()
+const run = async () => {
+	try {
+		const app = new Koa()
 
-app.use(async (ctx: Context) => {
-	ctx.body = 'Hello World'
-})
+		await connection()
 
-app.listen(3000, () => {
-	console.log('Сервер запущен!')
-})
+		app.use(async (ctx: Context) => {
+			ctx.body = 'Hello World'
+		})
+
+		app.listen(3000, () => {
+			console.log('Server started!')
+			console.log(process.env.DB_CONFIG)
+		})
+	} catch (e) {
+		console.error('Error on app initialization')
+		console.error(e)
+	}
+}
+
+run()
