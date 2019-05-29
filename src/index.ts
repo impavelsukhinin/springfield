@@ -16,7 +16,6 @@ const run = async () => {
 
 		app.listen(3000, () => {
 			console.log('Server started!')
-			console.log(process.env.DB_CONFIG)
 		})
 	} catch (e) {
 		console.error('Error on app initialization')
