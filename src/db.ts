@@ -1,4 +1,5 @@
 import { createConnection, Connection } from 'typeorm'
+import entities from 'entity'
 
 const { DB_NAME, DB_USERNAME, DB_PASSWORD } = process.env
 
@@ -11,4 +12,6 @@ export default async (): Promise<Connection> =>
 		username: DB_USERNAME,
 		password: DB_PASSWORD,
 		useNewUrlParser: true,
+		entities,
+		synchronize: true,
 	})

@@ -2,7 +2,11 @@ import 'env'
 import 'reflect-metadata'
 import connection from 'db'
 import * as Koa from 'koa'
-import { Context } from 'koa'
+import * as logger from 'koa-logger'
+import * as passport from 'koa-passport'
+import router from 'routes'
+
+// import 'strategies'
 
 const run = async () => {
 	try {
@@ -10,9 +14,11 @@ const run = async () => {
 
 		await connection()
 
-		app.use(async (ctx: Context) => {
-			ctx.body = 'Hello World'
-		})
+		app.use(router.routes())
+		app.use(router.allowedMethods())
+
+		app.use(logger)
+		app.use(passport.initialize())
 
 		app.listen(3000, () => {
 			console.log('Server started!')
