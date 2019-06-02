@@ -4,3 +4,4 @@ ormlogs.log*
 .env
 node_modules
 files/*
+yarn-error*
