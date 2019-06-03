@@ -10,6 +10,7 @@ import routes from 'routes'
 
 const run = async () => {
 	try {
+		const port = process.env.PORT ? Number(process.env.PORT) : 3000
 		const app = new Koa()
 
 		await connection()
@@ -20,8 +21,8 @@ const run = async () => {
 
 		app.use(logger())
 
-		app.listen(3000, () => {
-			console.log(`Server started in ${process.env.NODE_ENV} mode`)
+		app.listen(port, () => {
+			console.log(`Server started on ${port} port in ${process.env.NODE_ENV} mode`)
 		})
 	} catch (e) {
 		console.error('Error on app initialization')
