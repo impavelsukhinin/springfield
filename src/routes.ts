@@ -1,11 +1,21 @@
 import * as Router from 'koa-router'
 
-import AdminController from 'controllers/Admin'
+import * as AdminController from 'controllers/Admin'
+import * as AuthController from 'controllers/Auth'
 
-const adminRouter = new Router()
+const router = new Router()
 
-adminRouter.get('/remove_all_users', AdminController.removeAllUsers)
-adminRouter.get('/get_users', AdminController.getUsers)
-adminRouter.get('/create_admin', AdminController.createAdminUser)
+if (process.env.NODE_ENV === 'development') {
+	// Admin
+	router.get('/remove_all_users', AdminController.removeAllUsers)
+	router.get('/get_users', AdminController.getUsers)
+	router.get('/create_admin', AdminController.createAdminUser)
+}
 
-export { adminRouter }
+// Login
+router.post('/login', AuthController.login)
+router.get('/check', AuthController.checkAuth, (ctx) => {
+	ctx.body = JSON.stringify(ctx.user)
+})
+
+export default router

@@ -4,7 +4,6 @@
     "module": "commonjs",
     "sourceMap": true,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
     "outDir": "build",
     "baseUrl": "src",

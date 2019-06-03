@@ -1,14 +1,12 @@
 import 'reflect-metadata'
+import 'env'
+import 'auth'
 import connection from 'db'
-import * as dotenv from 'dotenv'
 import * as Koa from 'koa'
 import * as logger from 'koa-logger'
 import * as passport from 'koa-passport'
-import { adminRouter } from 'routes'
-
-// import 'strategies'
-
-dotenv.config()
+import * as bodyParser from 'koa-bodyparser'
+import routes from 'routes'
 
 const run = async () => {
 	try {
@@ -16,10 +14,11 @@ const run = async () => {
 
 		await connection()
 
-		app.use(adminRouter.routes()).use(adminRouter.allowedMethods())
-
-		app.use(logger)
+		app.use(bodyParser())
 		app.use(passport.initialize())
+		app.use(routes.routes()).use(routes.allowedMethods())
+
+		app.use(logger())
 
 		app.listen(3000, () => {
 			console.log(`Server started in ${process.env.NODE_ENV} mode`)

@@ -23,11 +23,10 @@ class User extends BaseEntity {
 	}
 
 	public checkPassword(password: string): boolean {
-		if (!password) return false
-
 		return (
-			crypto.pbkdf2Sync(password, this.salt, 1, 128, 'sha1') ===
-			this.passwordHash
+			!password ||
+			crypto.pbkdf2Sync(password, this.salt, 1, 128, 'sha1').toString() ===
+				this.passwordHash.toString()
 		)
 	}
 
