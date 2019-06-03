@@ -1,12 +1,14 @@
-import 'env'
 import 'reflect-metadata'
 import connection from 'db'
+import * as dotenv from 'dotenv'
 import * as Koa from 'koa'
 import * as logger from 'koa-logger'
 import * as passport from 'koa-passport'
 import { adminRouter } from 'routes'
 
 // import 'strategies'
+
+dotenv.config()
 
 const run = async () => {
 	try {
