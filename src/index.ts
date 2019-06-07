@@ -1,4 +1,3 @@
-import 'reflect-metadata'
 import 'env'
 import 'auth'
 import connection from 'db'
@@ -22,7 +21,9 @@ const run = async () => {
 		app.use(logger())
 
 		app.listen(port, () => {
-			console.log(`Server started on ${port} port in ${process.env.NODE_ENV} mode`)
+			console.log(
+				`Server started on ${port} port in ${process.env.NODE_ENV} mode`,
+			)
 		})
 	} catch (e) {
 		console.error('Error on app initialization')

@@ -1,16 +1,12 @@
-import { createConnection, Connection } from 'typeorm'
+import * as mongoose from 'mongoose'
+import { Mongoose } from 'mongoose'
 
 const { DB_NAME, DB_USERNAME, DB_PASSWORD } = process.env
 
-export default async (): Promise<Connection> =>
-	await createConnection({
-		type: 'mongodb',
-		host: 'mongo',
-		port: 27017,
-		database: DB_NAME,
-		username: DB_USERNAME,
-		password: DB_PASSWORD,
-		useNewUrlParser: true,
-		entities: ['src/entity/*.ts'],
-		synchronize: true,
-	})
+export default async (): Promise<Mongoose> =>
+	await mongoose.connect(
+		`mongodb://${DB_USERNAME}:${DB_PASSWORD}@mongo:27017/${DB_NAME}`,
+		{
+			useNewUrlParser: true,
+		},
+	)

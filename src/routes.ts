@@ -18,4 +18,8 @@ router.get('/check', AuthController.checkAuth, (ctx) => {
 	ctx.body = JSON.stringify(ctx.user)
 })
 
+router.get('/cr_cat', AuthController.createCategory)
+router.get('/cr_post', AuthController.createPost)
+router.get('/posts', AuthController.getPosts)
+
 export default router

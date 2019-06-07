@@ -2,7 +2,7 @@ import * as passport from 'koa-passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 
-import User from 'entity/User'
+import User from 'models/User'
 
 passport.use(
 	new LocalStrategy(
@@ -37,7 +37,7 @@ const jwtOptions = {
 passport.use(
 	new JwtStrategy(jwtOptions, async (payload, done) => {
 		try {
-			const user = await User.findOne(payload.id)
+			const user = await User.findOne({ _id: payload.id })
 
 			if (user) {
 				done(null, user)

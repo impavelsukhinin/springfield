@@ -1,11 +1,11 @@
 import { Middleware } from 'koa'
 
-import User from 'entity/User'
+import User from 'models/User'
 
 const { ADMIN_NAME, ADMIN_PASS } = process.env
 
 export const removeAllUsers: Middleware = async (ctx) => {
-	await User.remove(await User.find())
+	await User.remove({})
 
 	ctx.redirect('/get_users')
 }
@@ -25,7 +25,10 @@ export const createAdminUser: Middleware = async (ctx, next) => {
 			return next()
 		}
 
-		const user = new User(ADMIN_NAME, ADMIN_PASS)
+		const user = new User({
+			username: ADMIN_NAME,
+			password: ADMIN_PASS,
+		})
 
 		await user.save()
 		ctx.body = 'Done!'
